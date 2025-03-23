@@ -9,6 +9,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+option(BUILD_DOC "Build documentation" OFF)
+set(BUILD_DOC ON)
+
 set(CONFIG_SOURCE_DIR "${CMAKE_SOURCE_DIR}/configs")
 set(CONFIG_DEST_DIR "${CMAKE_BINARY_DIR}/configs")
 
@@ -29,5 +32,13 @@ add_custom_command(
 
 add_custom_target(CopyConfigFiles ALL DEPENDS ${OUTPUT_FILES})
 
+
+add_subdirectory(docs)
+
 add_executable(${PROJECT_NAME} source/main.cpp)
 add_dependencies(${PROJECT_NAME} CopyConfigFiles)
+
+if(BUILD_DOC)
+    add_dependencies(${PROJECT_NAME} docs_generation)
+endif()
+
