@@ -18,10 +18,14 @@ add_subdirectory(configs)
 # Setups the generation of documentation 
 add_subdirectory(docs)
 
+add_subdirectory(source/lib)
+
+add_subdirectory(tests)
+
 add_executable(${PROJECT_NAME} source/main.cpp)
 add_dependencies(${PROJECT_NAME} CopyConfigFiles)
 
 if(BUILD_DOC)
-    add_dependencies(${PROJECT_NAME} docs_generation)
+    add_dependencies(${PROJECT_NAME} DocsGeneration)
 endif()
 

@@ -10,14 +10,14 @@ if(Doxygen_FOUND AND BUILD_DOC)
         ${CMAKE_CURRENT_LIST_DIR}/doxygen-awesome-sidebar-only.css)
     message(STATUS "CSS stylesheets was downloaded successfully")
 
-    add_custom_target(docs_generation
+    add_custom_target(DocsGeneration
         COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/doxygen.conf
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Generating API documentation with Doxygen"
         BYPRODUCTS ${CMAKE_BINARY_DIR}/html/index.html
     )
 
-    add_custom_command(TARGET docs_generation POST_BUILD
+    add_custom_command(TARGET DocsGeneration POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E echo "Documentation successfully generated. You can preview at: ${CMAKE_BINARY_DIR}/html/index.html"
     )
 elseif(NOT BUILD_DOC)
